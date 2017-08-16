@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1007235676207",
+    "firebase_url": "https://korean-804dd.firebaseio.com",
+    "project_id": "korean-804dd",
+    "storage_bucket": "korean-804dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007235676207:android:222d18870a0f59f4",
+        "android_client_info": {
+          "package_name": "com.esp.korean"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1007235676207-4h28ndr09ck5ur8p0ikioje9uu9ubjae.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.esp.korean",
+            "certificate_hash": "31971288e18a77d551c28987c431879041158a5e"
+          }
+        },
+        {
+          "client_id": "1007235676207-h6hc6gagqbvjdolrspkg209sk7hsbkl0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvWI0L-WcFQ6VXWr342--oQGgLP9L-gmA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1007235676207-h6hc6gagqbvjdolrspkg209sk7hsbkl0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

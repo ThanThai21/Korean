@@ -2,6 +2,7 @@ package com.esp.korean.Home.Category;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.esp.korean.Model.Item;
 import com.esp.korean.Model.Subject;
 import com.esp.korean.R;
+import com.esp.korean.SubjectDetail.SubjectDetailActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapter.ItemViewHolder> {
@@ -35,6 +35,13 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         Subject subject = subjectList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SubjectDetailActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

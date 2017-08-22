@@ -22,6 +22,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.esp.korean.Login.LoginActivity;
 import com.esp.korean.R;
+import com.esp.korean.UserInfo.UserActivity;
+import com.esp.korean.UserInfo.UserInfo;
+import com.esp.korean.UserInfo.UserManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -53,7 +56,6 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         initFirebase();
         initToolbar();
         initNavigationView();
@@ -132,6 +134,11 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if (id == R.id.nav_user) {
+            Intent intent = new Intent(this, UserActivity.class);
+            startActivity(intent);
+        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -167,6 +174,8 @@ public class HomeActivity extends AppCompatActivity
             avatarUrl = mUser.getPhotoUrl();
             Glide.with(this).load(avatarUrl).into(avatarView);
             nameView.setText(userName);
+            UserManager.userInfo = new UserInfo(mUser.getDisplayName(), mUser.getPhotoUrl().toString());
+            UserManager.updateUserInfo();
         }
     }
 }

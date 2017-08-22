@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.esp.korean.CustomView.CustomRelativeLayout;
 import com.esp.korean.R;
+import com.esp.korean.UserInfo.UserInfo;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -53,6 +54,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 import java.util.List;
@@ -86,6 +89,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mGoogleApiClient;
     private CallbackManager mCallbackManager;
 
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+
     private ProgressDialog progressDialog;
 
     @Override
@@ -94,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public enum Type {
-        LOGIN, SIGNUP;
+        LOGIN, SIGNUP
     }
 
     @Override
@@ -110,6 +116,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void initFirebase() {
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("users");
         progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setMessage("Loading");
         loginWithFacebook();
@@ -220,6 +228,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                             .setDisplayName(name)
                                             .build();
                                     user.updateProfile(profileChangeRequest);
+                                    databaseReference.child(user.getUid()).setValue(new UserInfo(user.getDisplayName(), user.getPhotoUrl().toString()));
                                     finish();
                                 } else {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -325,6 +334,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            databaseReference.child(user.getUid()).setValue(new UserInfo(user.getDisplayName(), user.getPhotoUrl().toString()));
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -396,6 +406,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            databaseReference.child(user.getUid()).setValue(new UserInfo(user.getDisplayName(), user.getPhotoUrl().toString()));
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
